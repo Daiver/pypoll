@@ -6,9 +6,7 @@ offers request dispatching (Routes) with url parameter support, templates,
 a built-in HTTP Server and adapters for many third party WSGI/HTTP-server and
 template engines - all in a single file and with no dependencies other than the
 Python Standard Library.
-
 Homepage and documentation: http://bottlepy.org/
-
 Copyright (c) 2014, Marcel Hellkamp.
 License: MIT (see LICENSE for details)
 """
@@ -288,7 +286,6 @@ class Router(object):
         the first target that satisfies the request. The target may be anything,
         usually a string, ID or callable object. A route consists of a path-rule
         and a HTTP method.
-
         The path-rule is either a static path (e.g. `/contact`) or a dynamic
         path that contains wildcards (e.g. `/wiki/<page>`). The wildcard syntax
         and details on the matching order are described in docs:`routing`.
@@ -598,7 +595,6 @@ class Bottle(object):
     """ Each Bottle object represents a single, distinct web application and
         consists of routes, callbacks, plugins, resources and configuration.
         Instances are callable WSGI applications.
-
         :param catchall: If true (default), handle all exceptions. Turn off to
                          let debugging middleware handle exceptions.
     """
@@ -638,7 +634,6 @@ class Bottle(object):
 
     def add_hook(self, name, func):
         """ Attach a callback to a hook. Three hooks are currently implemented:
-
             before_request
                 Executed once before each request. The request context is
                 available, but no routing has happened yet.
@@ -675,13 +670,10 @@ class Bottle(object):
     def mount(self, prefix, app, **options):
         """ Mount an application (:class:`Bottle` or plain WSGI) to a specific
             URL prefix. Example::
-
                 root_app.mount('/admin/', admin_app)
-
             :param prefix: path prefix or `mount-point`. If it ends in a slash,
                 that slash is mandatory.
             :param app: an instance of :class:`Bottle` or a WSGI application.
-
             All other parameters are passed to the underlying :meth:`route` call.
         """
 
@@ -805,14 +797,11 @@ class Bottle(object):
               apply=None,
               skip=None, **config):
         """ A decorator to bind a function to a request URL. Example::
-
                 @app.route('/hello/<name>')
                 def hello(name):
                     return 'Hello %s' % name
-
             The ``:name`` part is a wildcard. See :class:`Router` for syntax
             details.
-
             :param path: Request path or a list of paths to listen to. If no
               path is specified, it is automatically generated from the
               signature of the function.
@@ -825,7 +814,6 @@ class Bottle(object):
               applied to the route callback in addition to installed plugins.
             :param skip: A list of plugins, plugin classes or names. Matching
               plugins are not installed to this route. ``True`` skips all.
-
             Any additional keyword arguments are stored as route-specific
             configuration and passed to plugins (see :meth:`Plugin.apply`).
         """
@@ -1032,7 +1020,6 @@ class Bottle(object):
 class BaseRequest(object):
     """ A wrapper for WSGI environment dictionaries that adds a lot of
         convenient access methods and properties. Most of them are read-only.
-
         Adding new attributes to a request actually adds them to the environ
         dictionary (as 'bottle.request.ext.<name>'). This is the recommended
         way to store and access request-specific data.
@@ -1143,7 +1130,6 @@ class BaseRequest(object):
     def files(self):
         """ File uploads parsed from `multipart/form-data` encoded POST or PUT
             request body. The values are instances of :class:`FileUpload`.
-
         """
         files = FormsDict()
         for name, item in self.POST.allitems():
@@ -1339,7 +1325,6 @@ class BaseRequest(object):
     def path_shift(self, shift=1):
         """ Shift path segments from :attr:`path` to :attr:`script_name` and
             vice versa.
-
            :param shift: The number of path segments to shift. May be negative
                          to change the shift direction. (default: 1)
         """
@@ -1485,16 +1470,13 @@ class HeaderProperty(object):
 
 class BaseResponse(object):
     """ Storage class for a response body as well as headers and cookies.
-
         This class does support dict-like case-insensitive item-access to
         headers, but is NOT a dict. Most notably, iterating over a response
         yields parts of the body and not the headers.
-
         :param body: The response body as one of the supported types.
         :param status: Either an HTTP status code (e.g. 200) or a status line
                        including the reason phrase (e.g. '200 OK').
         :param headers: A dictionary or a list of name-value pairs.
-
         Additional keyword arguments are added to the list of headers.
         Underscores in the header name are replaced with dashes.
     """
@@ -1658,14 +1640,11 @@ class BaseResponse(object):
     def set_cookie(self, name, value, secret=None, **options):
         """ Create a new cookie or replace an old one. If the `secret` parameter is
             set, create a `Signed Cookie` (described below).
-
             :param name: the name of the cookie.
             :param value: the value of the cookie.
             :param secret: a signature key required for signed cookies.
-
             Additionally, this method accepts all RFC 2109 attributes that are
             supported by :class:`cookie.Morsel`, including:
-
             :param max_age: maximum age in seconds. (default: None)
             :param expires: a datetime object or UNIX timestamp. (default: None)
             :param domain: the domain that is allowed to read the cookie.
@@ -1674,15 +1653,12 @@ class BaseResponse(object):
             :param secure: limit the cookie to HTTPS connections (default: off).
             :param httponly: prevents client-side javascript to read this cookie
               (default: off, requires Python 2.6 or newer).
-
             If neither `expires` nor `max_age` is set (default), the cookie will
             expire at the end of the browser session (as soon as the browser
             window is closed).
-
             Signed cookies may store any pickle-able object and are
             cryptographically signed to prevent manipulation. Keep in mind that
             cookies are limited to 4kb in most browsers.
-
             Warning: Signed cookies are not encrypted (the client can still see
             the content) and not copy-protected (the client can restore an old
             cookie). The main intention is to make pickling and unpickling
@@ -1960,7 +1936,6 @@ class MultiDict(DictMixin):
 
     def get(self, key, default=None, index=-1, type=None):
         """ Return the most recent value for a key.
-
             :param default: The default value to be returned if the key is not
                    present or the type conversion fails.
             :param index: An index for the list of available values.
@@ -2086,7 +2061,6 @@ class WSGIHeaderDict(DictMixin):
         (2.x bytes or 3.x unicode) and keys are case-insensitive. If the WSGI
         environment contains non-native string values, these are de- or encoded
         using a lossless 'latin1' character set.
-
         The API will remain stable even on changes to the relevant PEPs.
         Currently PEP 333, 444 and 3333 are supported. (PEP 444 is the only one
         that uses non-native strings.)
@@ -2153,7 +2127,6 @@ class ConfigDict(dict):
 
     def load_config(self, filename):
         """ Load values from an ``*.ini`` style config file.
-
             If the config file contains sections, their names are used as
             namespaces for the values within. The two special sections
             ``DEFAULT`` and ``bottle`` refer to the root namespace (no prefix).
@@ -2170,7 +2143,6 @@ class ConfigDict(dict):
     def load_dict(self, source, namespace=''):
         """ Load values from a dictionary structure. Nesting can be used to
             represent namespaces.
-
             >>> c = ConfigDict()
             >>> c.load_dict({'some': {'namespace': {'key': 'value'} } })
             {'some.namespace.key': 'value'}
@@ -2279,7 +2251,6 @@ class _closeiter(object):
 class ResourceManager(object):
     """ This class manages a list of search paths and helps to find and open
         application-bound resources (files).
-
         :param base: default value for :meth:`add_path` calls.
         :param opener: callable used to open resources.
         :param cachemode: controls which lookups are cached. One of 'all',
@@ -2299,7 +2270,6 @@ class ResourceManager(object):
     def add_path(self, path, base=None, index=None, create=False):
         """ Add a new path to the list of search paths. Return False if the
             path does not exist.
-
             :param path: The new search path. Relative paths are turned into
                 an absolute and normalized form. If the path looks like a file
                 (not ending in `/`), the filename is stripped off.
@@ -2307,10 +2277,8 @@ class ResourceManager(object):
                 Defaults to :attr:`base` which defaults to ``os.getcwd()``.
             :param index: Position within the list of search paths. Defaults
                 to last index (appends to the list).
-
             The `base` parameter makes it easy to reference files installed
             along with a python module or package::
-
                 res.add_path('./resources/', __file__)
         """
         base = os.path.abspath(os.path.dirname(base or self.base))
@@ -2340,7 +2308,6 @@ class ResourceManager(object):
 
     def lookup(self, name):
         """ Search for a resource and return an absolute file path, or `None`.
-
             The :attr:`path` list is searched in order. The first match is
             returend. Symlinks are followed. The result is cached to speed up
             future lookups. """
@@ -2381,7 +2348,6 @@ class FileUpload(object):
     def filename(self):
         """ Name of the file on the client file system, but normalized to ensure
             file system compatibility. An empty filename is returned as 'empty'.
-
             Only ASCII letters, digits, dashes, underscores and dots are
             allowed in the final filename. Accents are removed, if possible.
             Whitespace is replaced by a single dash. Leading or tailing dots
@@ -2409,7 +2375,6 @@ class FileUpload(object):
         """ Save file to disk or copy its content to an open file(-like) object.
             If *destination* is a directory, :attr:`filename` is added to the
             path. Existing files are not overwritten by default (IOError).
-
             :param destination: File path, directory or file(-like) object.
             :param overwrite: If True, replace existing files. (default: False)
             :param chunk_size: Bytes to read at a time. (default: 64kb)
@@ -2465,7 +2430,6 @@ def static_file(filename, root,
         ``Content-Length`` and ``Last-Modified`` headers are set if possible.
         Special support for ``If-Modified-Since``, ``Range`` and ``HEAD``
         requests.
-
         :param filename: Name or path of the file to send.
         :param root: Root path for file lookups. Should be an absolute directory
             path.
@@ -2653,7 +2617,6 @@ def yieldroutes(func):
     """ Return a generator for routes that match the signature (name, args)
     of the func parameter. This may yield more than one route if the function
     takes optional keyword arguments. The output is best described by example::
-
         a()         -> '/a'
         b(x, y)     -> '/b/<x>/<y>'
         c(x, y=5)   -> '/c/<x>' and '/c/<x>/<y>'
@@ -2671,7 +2634,6 @@ def yieldroutes(func):
 
 def path_shift(script_name, path_info, shift=1):
     """ Shift path fragments from PATH_INFO to SCRIPT_NAME and vice versa.
-
         :return: The modified paths.
         :param script_name: The SCRIPT_NAME path.
         :param script_name: The PATH_INFO path.
@@ -2946,7 +2908,6 @@ class DieselServer(ServerAdapter):
 
 class GeventServer(ServerAdapter):
     """ Untested. Options:
-
         * `fast` (default: False) uses libevent's http server, but has some
           issues: No streaming, no pipelining, no SSL.
         * See gevent.wsgi.WSGIServer() documentation for more options.
@@ -2995,7 +2956,6 @@ class GunicornServer(ServerAdapter):
 
 class EventletServer(ServerAdapter):
     """ Untested. Options:
-
         * `backlog` adjust the eventlet backlog parameter which is the maximum
           number of queued connections. Should be at least 1; the maximum
           value is system-dependent.
@@ -3113,11 +3073,9 @@ server_names = {
 
 def load(target, **namespace):
     """ Import a module or fetch an object from a module.
-
         * ``package.module`` returns `module` as a module object.
         * ``pack.mod:name`` returns the module variable `name` from `pack.mod`.
         * ``pack.mod:func()`` calls `pack.mod.func()` and returns the result.
-
         The last form accepts not only function calls, but any type of
         expression. Keyword arguments passed to this function are available as
         local variables. Example: ``import_string('re:compile(x)', x='[a-z]')``
@@ -3159,7 +3117,6 @@ def run(app=None,
         plugins=None,
         debug=None, **kargs):
     """ Start a server instance. This method blocks until the server terminates.
-
         :param app: WSGI application or target string supported by
                :func:`load_app`. (default: :func:`default_app`)
         :param server: Server adapter to use. See :data:`server_names` keys
@@ -3562,21 +3519,16 @@ class StplParser(object):
     _re_tok += r'''
         # 2: Comments (until end of line, but not the newline itself)
         |(\#.*)
-
         # 3: Open and close (4) grouping tokens
         |([\[\{\(])
         |([\]\}\)])
-
         # 5,6: Keywords that start or continue a python block (only start of line)
         |^([\ \t]*(?:if|for|while|with|try|def|class)\b)
         |^([\ \t]*(?:elif|else|except|finally)\b)
-
         # 7: Our special 'end' keyword (but only if it stands alone)
         |((?:^|;)[\ \t]*end[\ \t]*(?=(?:%(block_close)s[\ \t]*)?\r?$|;|\#))
-
         # 8: A customizable end-of-code-block template token (only end of line)
         |(%(block_close)s[\ \t]*(?=\r?$))
-
         # 9: And finally, a single newline. The 10th token is 'everything else'
         |(\r?\n)
     '''
@@ -3755,7 +3707,6 @@ jinja2_template = functools.partial(template, template_adapter=Jinja2Template)
 def view(tpl_name, **defaults):
     """ Decorator: renders a template for a handler.
         The handler can control its behavior like that:
-
           - return a dict of template vars to fill out the template
           - return something other than a dict and the view decorator will not
             process the template, but return the handler result as is.

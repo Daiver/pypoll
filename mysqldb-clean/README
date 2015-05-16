@@ -1,0 +1,13 @@
+This is an unofficial, unsupported semi-fork of the MySQLdb driver by Andy
+Dustman as hosted on SourceForge:
+
+  https://sourceforge.net/projects/mysql-python/
+
+It includes a number of my own patches and aggressive clean-ups, tracked in git
+since tracking my work in an anonymous svn repo with myriad patches not yet
+committed upstream became a burden.
+
+This code should be considered dangerous, unstable, toxic to small children and
+household pets.  It is merely a side project of mine to see if I can stabilize
+the 1.2 branch, drag it forward, and fix a number of bugs people are
+encountering.
