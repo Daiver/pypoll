@@ -7,6 +7,8 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/mysqldb-clean/bu
 
 import MySQLdb as mdb
 
+import peewee as pw
+
 from bottle import route, run, template, request, Bottle
 
 #app = Bottle()
@@ -15,13 +17,17 @@ from bottle import route, run, template, request, Bottle
 @route('/<name>')
 def index(name):
     try:
-        con = mdb.connect('localhost', 'root', '123', 'pract');
-        cur = con.cursor()
-        cur.execute("SELECT VERSION()")
+        #con = mdb.connect('localhost', 'root', '123', 'pract');
+        #cur = con.cursor()
+        #cur.execute("SELECT VERSION()")
 
-        ver = cur.fetchone()
+        #ver = cur.fetchone()
+
+        myDB = pw.MySQLDatabase("pract", host="localhost", user="root", passwd="123")
+        myDB.connect()
+
         return template('templates/index.html', name=str(request.remote_addr),
-                       info=ver)
+                       info='')
     except Exception, e:
         return template('templates/index.html', name='', info=(e))
     #return template('<b>Hello {{name}}</b>!', name=name)
