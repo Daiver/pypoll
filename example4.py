@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/mysqldb/build/lib.linux-x86_64-2.7/')
+
+import MySQLdb
+
+from bottle import route, run, template
+
+@route('/hello/<name>')
+def index(name):
+    return template('<b>Hello {{name}}</b>!', name=name)
+
+if __name__ == '__main__':
+    run(server='cgi')
