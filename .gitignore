@@ -1,2 +1,2 @@
-mysqldb/build/*
+#mysqldb/build/*
 *.pyc
