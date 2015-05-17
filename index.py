@@ -18,7 +18,11 @@ from bottle import route, run, template, request, Bottle, post
 
 @route('/formtest')
 def formtest():
-    return template('templates/form.html')
+    return template('templates/form.html', text='')
+
+@post('/formtest')
+def formtest():
+    return template('templates/form.html', text=request.forms.get('name'))
 
 #@route('/hello/<name>')
 @route('/<name>')
