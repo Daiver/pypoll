@@ -29,14 +29,14 @@ class Poll(pw.Model):
         database = myDB
 
 class PollItem(pw.Model):
-    owner   = ForeignKeyField(Poll, related_name='items')
+    owner   = pw.ForeignKeyField(Poll, related_name='items')
     caption = pw.CharField()
 
     class Meta:
         database = myDB
 
 class PollVote(pw.Model):
-    pollItem = ForeignKeyField(PollItem, related_name='votes')
+    pollItem = pw.ForeignKeyField(PollItem, related_name='votes')
     addres   = pw.CharField()
     token    = pw.CharField()
 
