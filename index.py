@@ -13,20 +13,20 @@ import MySQLdb as mdb
 
 from Model import myDB, Poll, PollItem, PollVote
 
-from bottle import route, run, template, request, Bottle, post, redirect, response, error, abort
+from bottle import route, run, template, request, Bottle, post, redirect, response, error, abort, static_file
 
 #app = Bottle()
 
 def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-@route('/formtest')
-def formtest():
-    return template('templates/form.html', text='')
+#@route('/formtest')
+#def formtest():
+    #return template('templates/form.html', text='')
 
-@post('/formtest')
-def formtest():
-    return template('templates/form.html', text=request.forms.get('name'))
+#@post('/formtest')
+#def formtest():
+    #return template('templates/form.html', text=request.forms.get('name'))
 
 
 #hostname = "http://192.168.10.101/cgi-bin/pypoll.py"
@@ -34,6 +34,11 @@ def formtest():
 @route('/info/<var>')
 def infoView(var):
     return template('templates/404.html', info=var)
+
+
+ute('/js/<filename>')
+def server_js(filename):
+    return static_file(filename, root='js/filename')
 
 @route('/poll/<url>')
 def poll(url):
