@@ -75,6 +75,8 @@ def newpoll():
     countOfItems = int(request.forms.get('countOfItems'))
     url = idGenerator(20)
     caption = request.forms.get('caption')
+    allowDoubleIP = request.forms,get('allowDoubleIP')
+    caption = allowDoubleIP
     if caption == '':
         return template('templates/403.html', info='Caption cannot be empty')
 
@@ -96,7 +98,7 @@ def newpoll():
 @route('/')
 def index():
     urlparts = request.urlparts
-    return template('templates/newpoll.html', hostname=urlparts.path)
+    return template('templates/newpoll.html', hostname=urlparts.path[:-1])
     #return template('templates/base.html')
 
 if __name__ == '__main__':
