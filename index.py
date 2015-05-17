@@ -56,7 +56,10 @@ def formtest():
 
 @route('/poll/<url>')
 def poll(url):
-    return template('templates/404.html')
+    myDB.connect()
+    polls = Poll.select().where(Poll.url == "1")
+    if len(polls) == 0:
+        return template('templates/404.html')
     #abort(404, "No such poll")
 
 @post('/newpoll')
@@ -64,10 +67,17 @@ def newpoll():
     countOfItems = int(request.forms.get('countOfItems'))
     url = idGenerator(20)
     caption = request.forms.get('caption')
+    if caption == '':
+        return template('templates/403.html')
 
     myDB.connect()
     poll = Poll(url=url, name=caption)
     poll.save()
+    for i in xrange(1, countOfItems + 1):
+        caption = request.forms.get('item_' + str(i))
+        pollItem = PollItem(owner=poll, position=i, caption=caption)
+        pollItem.save()
+
     return redirect('poll/' + url, code=200)
 
 @route('/')
