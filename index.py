@@ -13,7 +13,7 @@ import MySQLdb as mdb
 
 from Model import myDB, Person
 
-from bottle import route, run, template, request, Bottle, post, redirect, response
+from bottle import route, run, template, request, Bottle, post, redirect, response, error, abort
 
 #app = Bottle()
 
@@ -51,7 +51,7 @@ def index1(name):
     #return template('<b>Hello {{name}}</b>!', name=name)
 
 @error(404)
-def process404():
+def error404():
     return template('templates/404.html')
 
 @route('/poll/<url>')
