@@ -80,8 +80,10 @@ def vote():
     poll = Poll.select().where(Poll.url == url).get()    
     pollItem = PollItem.select().where(PollItem.owner == poll, PollItem.position == choice).get()
 
-    if PollVote.select().where(PollVote.pollItem.owner == poll, PollVote.addres == str(ip)).count() > 0:
-        return template('templates/403.html', info='There is vote from your IP')
+    for item in poll.items:
+        for vote in item.votes:
+            if vote.addres == str(ip):
+                return template('templates/403.html', info='There is vote from your IP')
     pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
     pollVote.save()
 
