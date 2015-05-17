@@ -50,6 +50,7 @@ def index1(name):
 def newpoll():
     response.status = 200
     #response.set_header('Location', '/hello')
+    return template('templates/newpoll.html')
     return redirect('/me')
 
 @route('/')
