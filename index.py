@@ -70,24 +70,24 @@ def poll(url):
 
 @post('/vote')
 def vote():
-    try:
-        url    = request.forms.get("url")
-        ip     = request.remote_addr
-        token  = ""
-        choice = int(request.forms.get('choice'))
+    #try:
+    url    = request.forms.get("url")
+    ip     = request.remote_addr
+    token  = ""
+    choice = int(request.forms.get('choice'))
 
-        myDB.connect()
-        poll = Poll.select().where(Poll.url == url).get()    
-        pollItem = PollItem.select().where(PollItem.owner == poll, PollItem.position == choice).get()
+    myDB.connect()
+    poll = Poll.select().where(Poll.url == url).get()    
+    pollItem = PollItem.select().where(PollItem.owner == poll, PollItem.position == choice).get()
 
-        pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
-        pollVote.save()
+    pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
+    pollVote.save()
 
-        urlparts = request.urlparts
-        hostUrl = '/'.join(urlparts.path.split('/')[:-1])
-        return redirect(hostUrl + "/poll/" + url, code=200)
-    except Exception as e:
-        return template('templates/404.html', info=str(e))
+    urlparts = request.urlparts
+    hostUrl = '/'.join(urlparts.path.split('/')[:-1])
+    return redirect(hostUrl + "/poll/" + url, code=200)
+#    except Exception as e:
+#        return template('templates/404.html', info=str(e))
 
 @post('/newpoll')
 def newpoll():
