@@ -80,7 +80,7 @@ def newpoll():
         return template('templates/403.html', info='Caption cannot be empty')
 
     myDB.connect()
-    poll = Poll(url=url, name=caption, doubleIPAllowed=(allowDoubleIP != None))
+    poll = Poll(url=url, name=caption, doubleIPAllowed=(allowDoubleIP != None), doubleTokensAllowed=True)
     poll.save()
     for i in xrange(1, countOfItems + 1):
         caption = request.forms.get('item_' + str(i))
