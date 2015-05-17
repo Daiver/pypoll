@@ -31,6 +31,10 @@ def formtest():
 
 #hostname = "http://192.168.10.101/cgi-bin/pypoll.py"
 
+@route('/info/<var>')
+def infoView(var):
+    return template('templates/404.html', info=var)
+
 @route('/poll/<url>')
 def poll(url):
     myDB.connect()
