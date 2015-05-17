@@ -46,6 +46,10 @@ def index1(name):
         return template('templates/index.html', name='', info=(e))
     #return template('<b>Hello {{name}}</b>!', name=name)
 
+@post('/newpoll')
+def newpoll():
+    return redirect('/me')
+
 @route('/')
 def index():
     return template('templates/newpoll.html')
