@@ -78,7 +78,7 @@ def vote():
 
         myDB.connect()
         poll = Poll.select().where(Poll.url == url).get()    
-        pollItem = PollItem.select().where(PollItem.poll == poll, PollItem.position == choice).get()
+        pollItem = PollItem.select().where(PollItem.owner == poll, PollItem.position == choice).get()
 
         pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
         pollVote.save()
