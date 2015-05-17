@@ -89,6 +89,8 @@ def newpoll():
         pollItem = PollItem(owner=poll, position=i, caption=caption)
         pollItem.save()
 
+    urlparts = request.urlparts
+    hostUrl = '/'.join(urlparts.path.split('/')[:-1])
     return redirect('poll/' + url, code=200)
 
 @route('/')
