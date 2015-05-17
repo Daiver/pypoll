@@ -66,6 +66,7 @@ def poll(url):
 
 @post('/vote')
 def vote():
+    url = request.forms.get("url")
     return redirect("poll/" + url, code=200)
 
 @post('/newpoll')
