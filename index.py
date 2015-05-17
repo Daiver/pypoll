@@ -63,7 +63,7 @@ def poll(url):
         poll = Poll.select().where(Poll.url == url).get()
         urlparts = request.urlparts
         hostUrl = '/'.join(urlparts.path.split('/')[:-2])
-        return template('templates/poll.html', poll=poll, hostname=hostUrl)
+        return template('templates/poll.html', poll=poll, hostname=hostUrl, info="")
     except Exception as e:
         return template('templates/404.html', info=str(e))
     #abort(404, "No such poll")
@@ -80,6 +80,8 @@ def vote():
     poll = Poll.select().where(Poll.url == url).get()    
     pollItem = PollItem.select().where(PollItem.owner == poll, PollItem.position == choice).get()
 
+    if PollVote.select().where(PollVote.pollItem == pollItem, PollVote.addres == str(ip))
+        return template('templates/403.html', info='There is vote from your IP')
     pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
     pollVote.save()
 
@@ -95,7 +97,7 @@ def newpoll():
     url = idGenerator(20)
     caption = request.forms.get('caption')
     if caption == '':
-        return template('templates/403.html')
+        return template('templates/403.html', info='Caption cannot be empty')
 
     myDB.connect()
     poll = Poll(url=url, name=caption)
