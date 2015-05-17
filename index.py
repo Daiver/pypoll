@@ -54,6 +54,8 @@ def formtest():
 #def error404():
     #return template('templates/404.html')
 
+hostname = "http://192.168.10.101/cgi-bin/pypoll.py"
+
 @route('/poll/<url>')
 def poll(url):
     myDB.connect()
