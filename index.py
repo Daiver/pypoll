@@ -70,19 +70,22 @@ def poll(url):
 
 @post('/vote')
 def vote():
-    url    = request.forms.get("url")
-    ip     = request.remote_addr
-    token  = ""
-    choice = int(request.forms.get('choice'))
+    try:
+        url    = request.forms.get("url")
+        ip     = request.remote_addr
+        token  = ""
+        choice = int(request.forms.get('choice'))
 
-    myDB.connect()
-    poll = Poll.select().where(Poll.url == url).get()    
-    pollItem = PollItem.select().where(PollItem.poll == poll, PollItem.position == choice).get()
+        myDB.connect()
+        poll = Poll.select().where(Poll.url == url).get()    
+        pollItem = PollItem.select().where(PollItem.poll == poll, PollItem.position == choice).get()
 
-    pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
-    pollVote.save()
+        pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
+        pollVote.save()
 
-    return redirect("poll/" + url, code=200)
+        return redirect("poll/" + url, code=200)
+    except Exception as e:
+        return template('templates/404.html', info=str(e))
 
 @post('/newpoll')
 def newpoll():
