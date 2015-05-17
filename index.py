@@ -50,9 +50,10 @@ def index1(name):
         return template('templates/index.html', name='', info=(e))
     #return template('<b>Hello {{name}}</b>!', name=name)
 
-@route('poll/<url>')
+@route('/poll/<url>')
 def poll(url):
-    abort(404, "No such poll")
+    return template('templates/404.html')
+    #abort(404, "No such poll")
 
 @post('/newpoll')
 def newpoll():
