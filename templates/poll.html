@@ -1,8 +1,6 @@
 % rebase('templates/base.html')
 
 <form action="{{hostname}}/vote", method="POST">
-    % if info != ""
-        <h2>Info: {{info}}</h2>
     <h3>Poll</h3>
     <h3>{{poll.name}}</h3>
 
