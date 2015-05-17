@@ -20,3 +20,26 @@ class Person(pw.Model):
     class Meta:
         database = myDB
 
+class Poll(pw.Model):
+    name    = pw.CharField()
+    created = pw.DateField()
+    # = pw.BooleanField()
+
+    class Meta:
+        database = myDB
+
+class PollItem(pw.Model):
+    owner   = ForeignKeyField(Poll, related_name='items')
+    caption = pw.CharField()
+
+    class Meta:
+        database = myDB
+
+class PollVote(pw.Model):
+    pollItem = ForeignKeyField(PollItem, related_name='votes')
+    addres   = pw.CharField()
+    token    = pw.CharField()
+
+    class Meta:
+        database = myDB
+
