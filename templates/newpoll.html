@@ -1,5 +1,14 @@
 % rebase('templates/base.html')
 
+<script language="javascript">
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        var fingerprint = new Fingerprint().get();
+        $("#token").val(fingerprint)
+    });
+</script>
+
+
 <div name="newpollform">
 
     <form  method="POST" action="{{hostname}}/newpoll">
@@ -18,6 +27,7 @@
         <input type="TEXT" name="item_3">
 
         <input type="HIDDEN" name="countOfItems" value = "3">
+        <input type="HIDDEN" name="token" value = "">
 
         <p>Allow several votes from one IP
             <input type="CHECKBOX" name="allowDoubleIP" > </input>
@@ -29,7 +39,7 @@
 
 
         </br>
-        <input type="SUBMIT">
+        <input type="SUBMIT" disabled="disabled">
 
     </form>
 
