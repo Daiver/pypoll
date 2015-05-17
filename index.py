@@ -57,7 +57,7 @@ def vote():
     #try:
     url    = request.forms.get("url")
     ip     = request.remote_addr
-    token  = str(ip)
+    token  = str(request.forms.get("token"))
     choice = int(request.forms.get('choice'))
 
     myDB.connect()
