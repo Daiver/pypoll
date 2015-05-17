@@ -64,6 +64,10 @@ def poll(url):
         return template('templates/404.html', info=str(e))
     #abort(404, "No such poll")
 
+@post('/vote')
+def vote():
+    return redirect("poll/" + url, code=200)
+
 @post('/newpoll')
 def newpoll():
     countOfItems = int(request.forms.get('countOfItems'))
