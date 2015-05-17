@@ -61,7 +61,7 @@ def poll(url):
     myDB.connect()
     try:
         poll = Poll.select().where(Poll.url == url).get()
-        return template('templates/poll.html', poll=poll)
+        return template('templates/poll.html', poll=poll, hostname=hostname)
     except Exception as e:
         return template('templates/404.html', info=str(e))
     #abort(404, "No such poll")
