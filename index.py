@@ -60,8 +60,8 @@ def poll(url):
     try:
         poll = Poll.select().where(Poll.url == url).get()
         return template('templates/poll.html', poll=poll)
-    except:
-        return template('templates/404.html')
+    except Exception as e:
+        return template('templates/404.html', info=str(e))
     #abort(404, "No such poll")
 
 @post('/newpoll')
