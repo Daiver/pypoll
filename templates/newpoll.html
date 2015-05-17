@@ -3,7 +3,8 @@
 <script language="javascript">
     $( document ).ready(function() {
         $("#btnAdd").click(function (){
-            console.log("YO");
+            console.log("adding....");
+            $("#items").append("<p>Item #4</p>  <input type='TEXT' name='item_4'> ")
         });
         console.log( "ready!" );
     });
