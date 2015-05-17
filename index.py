@@ -11,20 +11,14 @@ import MySQLdb as mdb
 
 from Model import myDB, Person
 
-#import peewee as pw
-#myDB = pw.MySQLDatabase("pract", host="localhost", user="root", passwd="123")
 
-#class Person(pw.Model):
-    #name = pw.CharField()
-    #birthday = pw.DateField()
-    #is_relative = pw.BooleanField()
-
-    #class Meta:
-        #database = myDB
-
-from bottle import route, run, template, request, Bottle
+from bottle import route, run, template, request, Bottle, post
 
 #app = Bottle()
+
+@route('/formtest')
+def formtest():
+    return template('templates/form.html')
 
 #@route('/hello/<name>')
 @route('/<name>')

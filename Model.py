@@ -29,8 +29,9 @@ class Poll(pw.Model):
         database = myDB
 
 class PollItem(pw.Model):
-    owner   = pw.ForeignKeyField(Poll, related_name='items')
-    caption = pw.CharField()
+    owner    = pw.ForeignKeyField(Poll, related_name='items')
+    caption  = pw.CharField()
+    position = pw.IntegerField()
 
     class Meta:
         database = myDB
