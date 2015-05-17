@@ -36,7 +36,7 @@ def infoView(var):
     return template('templates/404.html', info=var)
 
 
-ute('/js/<filename>')
+@route('/js/<filename>')
 def server_js(filename):
     return static_file(filename, root='js/filename')
 
