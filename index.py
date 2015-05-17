@@ -26,7 +26,7 @@ def formtest():
 
 #@route('/hello/<name>')
 @route('/<name>')
-def index(name):
+def index1(name):
     try:
         #con = mdb.connect('localhost', 'root', '123', 'pract');
         #cur = con.cursor()
@@ -45,6 +45,10 @@ def index(name):
     except Exception, e:
         return template('templates/index.html', name='', info=(e))
     #return template('<b>Hello {{name}}</b>!', name=name)
+
+@route('/')
+def index():
+    return template('templates/base.html')
 
 if __name__ == '__main__':
     run(server='cgi')
