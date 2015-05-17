@@ -84,12 +84,13 @@ def newpoll():
     countOfItems = int(request.forms.get('countOfItems'))
     url = idGenerator(20)
     caption = request.forms.get('caption')
-    allowDoubleIP = request.forms.get('allowDoubleIP')
+    allowDoubleIP     = request.forms.get('allowDoubleIP')
+    allowDoubleTokens = request.forms.get('allowDoubleTokens')
     if caption == '':
         return template('templates/403.html', info='Caption cannot be empty')
 
     myDB.connect()
-    poll = Poll(url=url, name=caption, doubleIPAllowed=(allowDoubleIP != None), doubleTokensAllowed=True)
+    poll = Poll(url=url, name=caption, doubleIPAllowed=(allowDoubleIP != None), doubleTokensAllowed=(allowDoubleTokens != None))
     poll.save()
     for i in xrange(1, countOfItems + 1):
         caption = request.forms.get('item_' + str(i))
