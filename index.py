@@ -58,7 +58,10 @@ def vote():
     url    = request.forms.get("url")
     ip     = request.remote_addr
     token  = str(request.forms.get("token"))
-    choice = int(request.forms.get('choice'))
+    choice = request.forms.get('choice')
+    if choice == None:
+        return template('templates/403.html', info='Bad choice number')
+    choice = int(choice)
 
     myDB.connect()
     poll = Poll.select().where(Poll.url == url).get()    
