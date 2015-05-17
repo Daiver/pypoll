@@ -60,7 +60,7 @@ def vote():
             if vote.addres == str(ip) and not poll.doubleIPAllowed:
                 return template('templates/403.html', info='There is vote from your IP')
             if vote.token == token and not poll.doubleTokensAllowed:
-                return template('templates/403.html', info='There is vote from your IP')
+                return template('templates/403.html', info='There is vote from your browser')
     pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
     pollVote.save()
 
@@ -92,7 +92,7 @@ def newpoll():
 
     urlparts = request.urlparts
     hostUrl = '/'.join(urlparts.path.split('/')[:-1])
-    return redirect(hostUrl + 'poll/' + url, code=200)
+    return redirect(hostUrl + '/poll/' + url, code=200)
 
 @route('/')
 def index():
