@@ -6,7 +6,7 @@
             console.log("adding....");
             count = parseInt($("#countOfItems").val());
             count = count + 1;
-            $("countOfItems").val(count.toString());
+            $("#countOfItems").val(count.toString());
             $("#items").append("<p>Item #" + count.toString() +"</p>  <input type='TEXT' name='item_" + count.toString() + "'> ")
         });
         console.log( "ready!" );
