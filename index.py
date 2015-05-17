@@ -83,7 +83,9 @@ def vote():
         pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
         pollVote.save()
 
-        return redirect("poll/" + url, code=200)
+        urlparts = request.urlparts
+        hostUrl = '/'.join(urlparts.path.split('/')[:-1])
+        return redirect(hostUrl + "/poll/" + url, code=200)
     except Exception as e:
         return template('templates/404.html', info=str(e))
 
