@@ -6,6 +6,7 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/mysqldb-clean/bu
 #sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/mysqldb/build/lib.linux-x86_64-2.7/')
 
 from datetime import date
+import datetime
 
 import MySQLdb as mdb
 

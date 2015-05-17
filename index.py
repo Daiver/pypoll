@@ -66,7 +66,7 @@ def newpoll():
     caption = request.forms.get('caption')
 
     myDB.connect()
-    poll = Poll(url, caption)
+    poll = Poll(url=url, name=caption)
     poll.save()
     return redirect('poll/' + url, code=200)
 
