@@ -1,13 +1,15 @@
 % rebase('templates/base.html')
 
-<form action="vote", method="POST">
+<form action="../vote", method="POST">
     <h3>Poll</h3>
     <h3>{{poll.name}}</h3>
 
     <input type="HIDDEN" name=url value="{{poll.url}}" />
 
     % for item in poll.items:
-        <input type="RADIO" name="choise" value="{{item.caption}}">{{item.caption}}</input></br>
+        <input type="RADIO" name="choise" value="{{item.caption}}">{{item.caption}}</input>
+        </br>
+        </br>
     % end
     <input type="SUBMIT" />
 
