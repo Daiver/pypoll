@@ -12,7 +12,7 @@ import MySQLdb as mdb
 from Model import myDB, Person
 
 
-from bottle import route, run, template, request, Bottle, post
+from bottle import route, run, template, request, Bottle, post, redirect
 
 #app = Bottle()
 
