@@ -6,15 +6,19 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/mysqldb-clean/bu
 #sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/mysqldb/build/lib.linux-x86_64-2.7/')
 
 from datetime import date
+import string
+import random
 
 import MySQLdb as mdb
 
 from Model import myDB, Person
 
-
 from bottle import route, run, template, request, Bottle, post, redirect, response
 
 #app = Bottle()
+
+def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 @route('/formtest')
 def formtest():
@@ -46,11 +50,13 @@ def index1(name):
         return template('templates/index.html', name='', info=(e))
     #return template('<b>Hello {{name}}</b>!', name=name)
 
+@route('poll/<url>')
+def poll(url):
+    abort(404, "No such poll")
+
 @post('/newpoll')
 def newpoll():
-    response.status = 200
-    #response.set_header('Location', '/hello')
-    return template('templates/newpoll.html')
+
     return redirect('me', code=200)
 
 @route('/')

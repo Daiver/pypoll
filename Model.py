@@ -21,6 +21,7 @@ class Person(pw.Model):
         database = myDB
 
 class Poll(pw.Model):
+    url     = pw.CharField()
     name    = pw.CharField()
     created = pw.DateField()
     # = pw.BooleanField()
