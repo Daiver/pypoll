@@ -48,7 +48,8 @@ def index1(name):
 
 @route('/')
 def index():
-    return template('templates/base.html')
+    return template('templates/wrap.html')
+    #return template('templates/base.html')
 
 if __name__ == '__main__':
     run(server='cgi')
