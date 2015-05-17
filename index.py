@@ -62,7 +62,7 @@ def poll(url):
     try:
         poll = Poll.select().where(Poll.url == url).get()
         urlparts = request.urlparts
-        hostUrl = '/' + '/'.join(urlparts.path.split('/')[:-2])
+        hostUrl = '/'.join(urlparts.path.split('/')[:-2])
         return template('templates/poll.html', poll=poll, hostname=hostUrl)
     except Exception as e:
         return template('templates/404.html', info=str(e))

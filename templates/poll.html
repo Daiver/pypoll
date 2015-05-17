@@ -7,7 +7,7 @@
     <input type="HIDDEN" name=url value="{{poll.url}}" />
 
     % for item in poll.items:
-        <input type="RADIO" name="choise" value="{{item.position}}">{{item.caption}}</input>
+        <input type="RADIO" name="choise" value="{{item.position}}">{{item.caption}} : {{item.votes.count()}}</input>
         </br>
         </br>
     % end
