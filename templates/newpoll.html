@@ -20,26 +20,28 @@
         <p>Caption</p>
         <input type="TEXT" name="caption">
 
-        <p>Item #1</p>
-        <input type="TEXT" name="item_1">
+        <div id=items>
+            <p>Item #1</p>
+            <input type="TEXT" name="item_1">
 
-        <p>Item #2</p>
-        <input type="TEXT" name="item_2">
+            <p>Item #2</p>
+            <input type="TEXT" name="item_2">
 
-        <p>Item #3</p>
-        <input type="TEXT" name="item_3">
+            <p>Item #3</p>
+            <input type="TEXT" name="item_3">
 
-        <input type="HIDDEN" name="countOfItems" value = "3">
-        <!--<input type="HIDDEN" name="token" id="token" value = "">-->
+            <input type="HIDDEN" name="countOfItems" value = "3">
+            <!--<input type="HIDDEN" name="token" id="token" value = "">-->
 
-        <p>Allow several votes from one IP
-            <input type="CHECKBOX" name="allowDoubleIP" > </input>
-        </p>
-        </br>
-        
-        <p>Allow several votes from one browser
-        <input type="CHECKBOX" checked="checked" name="allowDoubleTokens" />
-        </p>
+            <p>Allow several votes from one IP
+                <input type="CHECKBOX" name="allowDoubleIP" > </input>
+            </p>
+            </br>
+            
+            <p>Allow several votes from one browser
+            <input type="CHECKBOX" checked="checked" name="allowDoubleTokens" />
+            </p>
+        </div>
 
         <input type="BUTTON" id=btnAdd value="Add Item"> </input>
 
