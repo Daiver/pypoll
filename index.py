@@ -54,14 +54,15 @@ def formtest():
 #def error404():
     #return template('templates/404.html')
 
-hostname = "http://192.168.10.101/cgi-bin/pypoll.py"
+#hostname = "http://192.168.10.101/cgi-bin/pypoll.py"
 
 @route('/poll/<url>')
 def poll(url):
     myDB.connect()
     try:
         poll = Poll.select().where(Poll.url == url).get()
-        return template('templates/poll.html', poll=poll, hostname=hostname)
+        urlparts = request.urlparts
+        return template('templates/poll.html', poll=poll, hostname=urlparts.scheme)
     except Exception as e:
         return template('templates/404.html', info=str(e))
     #abort(404, "No such poll")
