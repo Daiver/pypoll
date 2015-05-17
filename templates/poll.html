@@ -1,5 +1,14 @@
 % rebase('templates/base.html')
 
+<script language="javascript">
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        var fingerprint = new Fingerprint().get();
+        $("#token").val(fingerprint)
+    });
+</script>
+
+
 <form action="{{hostname}}/vote", method="POST">
     <h3>Poll</h3>
     <h3>{{poll.name}}</h3>
@@ -11,6 +20,7 @@
         </br>
         </br>
     % end
+    <input type="HIDDEN" name=token id=token value="">
     <input type="SUBMIT" />
 
 </form>
