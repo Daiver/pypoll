@@ -40,7 +40,7 @@ def index(name):
         #Person.create_table()
         #uncle_bob = Person(name='Bob', birthday=date(1960, 1, 15), is_relative=True)
         #uncle_bob.save()
-        grandma = Person.select().where(Person.name == 'Bob').get()
+        grandma = Person.select().where(Person.name == 'Grand').get()
 
         return template('templates/index.html', name=str(request.remote_addr),
                        info=str(grandma.name))
