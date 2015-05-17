@@ -9,7 +9,7 @@ from datetime import date
 
 import MySQLdb as mdb
 
-from model import myDB, Person
+from Model import myDB, Person
 
 #import peewee as pw
 #myDB = pw.MySQLDatabase("pract", host="localhost", user="root", passwd="123")
