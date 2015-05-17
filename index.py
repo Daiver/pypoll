@@ -62,7 +62,7 @@ def poll(url):
     try:
         poll = Poll.select().where(Poll.url == url).get()
         urlparts = request.urlparts
-        hostUrl = ''.join(urlparts.path.split('/')[:-2])
+        hostUrl = '/' + '/'.join(urlparts.path.split('/')[:-2])
         return template('templates/poll.html', poll=poll, hostname=hostUrl)
     except Exception as e:
         return template('templates/404.html', info=str(e))
@@ -70,7 +70,18 @@ def poll(url):
 
 @post('/vote')
 def vote():
-    url = request.forms.get("url")
+    url    = request.forms.get("url")
+    ip     = request.remote_addr
+    token  = ""
+    choice = int(request.forms.get('choice'))
+
+    myDB.connect()
+    poll = Poll.select().where(Poll.url == url).get()    
+    pollItem = PollItem.select().where(PollItem.poll == poll, PollItem.position == choice).get()
+
+    pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
+    pollVote.save()
+
     return redirect("poll/" + url, code=200)
 
 @post('/newpoll')
