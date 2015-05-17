@@ -4,8 +4,7 @@
     $( document ).ready(function() {
         $("#btnAdd").click(function (){
             console.log("adding....");
-            count = parseInt($("countOfItems").val());
-            console.log( count );
+            count = parseInt($("#countOfItems").val());
             count = count + 1;
             $("countOfItems").val(count.toString());
             $("#items").append("<p>Item #" + count.toString() +"</p>  <input type='TEXT' name='item_" + count.toString() + "'> ")
