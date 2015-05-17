@@ -73,7 +73,7 @@ def vote():
     #try:
     url    = request.forms.get("url")
     ip     = request.remote_addr
-    token  = ""
+    token  = str(ip)
     choice = int(request.forms.get('choice'))
 
     myDB.connect()
@@ -82,7 +82,9 @@ def vote():
 
     for item in poll.items:
         for vote in item.votes:
-            if vote.addres == str(ip):
+            if vote.addres == str(ip) and not poll.doubleIPAllowed:
+                return template('templates/403.html', info='There is vote from your IP')
+            if vote.token == token and not poll.doubleTokensAllowed:
                 return template('templates/403.html', info='There is vote from your IP')
     pollVote = PollVote(pollItem=pollItem, addres=str(ip), token=token)
     pollVote.save()

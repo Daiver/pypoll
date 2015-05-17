@@ -13,18 +13,13 @@ import MySQLdb as mdb
 import peewee as pw
 myDB = pw.MySQLDatabase("pract", host="localhost", user="root", passwd="123")
 
-class Person(pw.Model):
-    name = pw.CharField()
-    birthday = pw.DateField()
-    is_relative = pw.BooleanField()
-
-    class Meta:
-        database = myDB
 
 class Poll(pw.Model):
-    url     = pw.CharField()
-    name    = pw.CharField()
-    created = pw.DateTimeField(default=datetime.datetime.now)
+    url             =    pw.CharField()
+    name                = pw.CharField()
+    created             = pw.DateTimeField(default=datetime.datetime.now)
+    doubleIPAllowed     = pw.BooleanField(default=True)
+    doubleTokensAllowed = pw.BooleanField(default=False)
     # = pw.BooleanField()
 
     class Meta:
