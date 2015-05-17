@@ -48,7 +48,7 @@ def index1(name):
 
 @route('/')
 def index():
-    return template('templates/wrap.html')
+    return template('templates/newpoll.html')
     #return template('templates/base.html')
 
 if __name__ == '__main__':
