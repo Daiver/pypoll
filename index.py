@@ -95,7 +95,8 @@ def newpoll():
 
 @route('/')
 def index():
-    return template('templates/newpoll.html')
+    urlparts = request.urlparts
+    return template('templates/newpoll.html', hostname=urlparts.path)
     #return template('templates/base.html')
 
 if __name__ == '__main__':
