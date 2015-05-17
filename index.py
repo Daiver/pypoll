@@ -59,7 +59,7 @@ def poll(url):
     myDB.connect()
     try:
         poll = Poll.select().where(Poll.url == url).get()
-        return "OK!"
+        return template('templates/poll.html', poll=poll)
     except:
         return template('templates/404.html')
     #abort(404, "No such poll")
