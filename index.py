@@ -51,7 +51,7 @@ def newpoll():
     response.status = 200
     #response.set_header('Location', '/hello')
     return template('templates/newpoll.html')
-    return redirect('/me')
+    return redirect('me', code=200)
 
 @route('/')
 def index():
