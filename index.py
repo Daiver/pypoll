@@ -56,11 +56,12 @@ def error404():
 
 @route('/poll/<url>')
 def poll(url):
-    abort(404, "No such poll")
+    return template('templates/404.html')
+    #abort(404, "No such poll")
 
 @post('/newpoll')
 def newpoll():
-
+    countOfItems = int(request.forms.get('countOfItems'))
     return redirect('me', code=200)
 
 @route('/')
