@@ -62,7 +62,8 @@ def poll(url):
     try:
         poll = Poll.select().where(Poll.url == url).get()
         urlparts = request.urlparts
-        return template('templates/poll.html', poll=poll, hostname=urlparts.scheme)
+        hostUrl = urlparts.path.split('/')[:-2]
+        return template('templates/poll.html', poll=poll, hostname=hostUrl)
     except Exception as e:
         return template('templates/404.html', info=str(e))
     #abort(404, "No such poll")
