@@ -12,7 +12,7 @@ import MySQLdb as mdb
 from Model import myDB, Person
 
 
-from bottle import route, run, template, request, Bottle, post, redirect
+from bottle import route, run, template, request, Bottle, post, redirect, response
 
 #app = Bottle()
 
@@ -48,6 +48,8 @@ def index1(name):
 
 @post('/newpoll')
 def newpoll():
+    response.status = 200
+    #response.set_header('Location', '/hello')
     return redirect('/me')
 
 @route('/')
