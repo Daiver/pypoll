@@ -4,7 +4,10 @@
     $( document ).ready(function() {
         $("#btnAdd").click(function (){
             console.log("adding....");
-            $("#items").append("<p>Item #4</p>  <input type='TEXT' name='item_4'> ")
+            count = parseInt($("countOfItems").val());
+            count = count + 1;
+            $("countOfItems").val(count.toString());
+            $("#items").append("<p>Item #" + count.toString() +"</p>  <input type='TEXT' name='item_" + count.toString() + "'> ")
         });
         console.log( "ready!" );
     });
@@ -31,18 +34,19 @@
             <p>Item #3</p>
             <input type="TEXT" name="item_3">
 
-            <input type="HIDDEN" name="countOfItems" value = "3">
-            <!--<input type="HIDDEN" name="token" id="token" value = "">-->
-
-            <p>Allow several votes from one IP
-                <input type="CHECKBOX" name="allowDoubleIP" > </input>
-            </p>
-            </br>
-            
-            <p>Allow several votes from one browser
-            <input type="CHECKBOX" checked="checked" name="allowDoubleTokens" />
-            </p>
         </div>
+
+        <input type="HIDDEN" name="countOfItems" id="countOfItems" value = "3">
+        <!--<input type="HIDDEN" name="token" id="token" value = "">-->
+
+        <p>Allow several votes from one IP
+            <input type="CHECKBOX" name="allowDoubleIP" > </input>
+        </p>
+        </br>
+        
+        <p>Allow several votes from one browser
+        <input type="CHECKBOX" checked="checked" name="allowDoubleTokens" />
+        </p>
 
         <input type="BUTTON" id=btnAdd value="Add Item"> </input>
 
