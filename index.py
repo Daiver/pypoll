@@ -57,8 +57,10 @@ def formtest():
 @route('/poll/<url>')
 def poll(url):
     myDB.connect()
-    polls = Poll.select().where(Poll.url == "1")
-    if len(polls) == 0:
+    try:
+        poll = Poll.select().where(Poll.url == url).get()
+        return "OK!"
+    except:
         return template('templates/404.html')
     #abort(404, "No such poll")
 
