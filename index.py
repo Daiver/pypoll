@@ -9,16 +9,18 @@ from datetime import date
 
 import MySQLdb as mdb
 
-import peewee as pw
-myDB = pw.MySQLDatabase("pract", host="localhost", user="root", passwd="123")
+from model import myDB, Person
 
-class Person(pw.Model):
-    name = pw.CharField()
-    birthday = pw.DateField()
-    is_relative = pw.BooleanField()
+#import peewee as pw
+#myDB = pw.MySQLDatabase("pract", host="localhost", user="root", passwd="123")
 
-    class Meta:
-        database = myDB
+#class Person(pw.Model):
+    #name = pw.CharField()
+    #birthday = pw.DateField()
+    #is_relative = pw.BooleanField()
+
+    #class Meta:
+        #database = myDB
 
 from bottle import route, run, template, request, Bottle
 
