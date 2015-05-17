@@ -11,7 +11,7 @@ import random
 
 import MySQLdb as mdb
 
-from Model import myDB, Person
+from Model import myDB, Person, Poll, PollItem, PollVote
 
 from bottle import route, run, template, request, Bottle, post, redirect, response, error, abort
 
@@ -62,7 +62,13 @@ def poll(url):
 @post('/newpoll')
 def newpoll():
     countOfItems = int(request.forms.get('countOfItems'))
-    return redirect('me', code=200)
+    url = idGenerator(20)
+    caption = request.forms.get('caption')
+
+    myDB.connect()
+    poll = Poll(url, caption)
+    poll.save()
+    return redirect('poll/' + url, code=200)
 
 @route('/')
 def index():

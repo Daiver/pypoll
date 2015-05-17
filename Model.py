@@ -23,7 +23,7 @@ class Person(pw.Model):
 class Poll(pw.Model):
     url     = pw.CharField()
     name    = pw.CharField()
-    created = pw.DateField()
+    created = pw.DateTimeField(default=datetime.datetime.now)
     # = pw.BooleanField()
 
     class Meta:
