@@ -18,20 +18,10 @@
 
     <input type="HIDDEN" name=url value="{{poll.url}}" />
 
-    % count = 0
     % for item in poll.items:
-        % count += item.votes.count()
-    % end
 
-    % for item in poll.items:
-        % if count == 0:
-            % curPart = 0
-        % end
-        % if count != 0:
-            % curPart = item.votes.count()/float(count)
-        % end
-        % curPart = '%10.4f' % (curPart * 100.0)
-        <input type="RADIO" name="choice" value="{{item.position}}"> {{item.caption}} | Votes: {{item.votes.count()}} / {{curPart}}%</input>
+        <input type="RADIO" name="choice" value="{{item.position}}"> {{item.caption}} </input>
+        <!--<input type="RADIO" name="choice" value="{{item.position}}"> {{item.caption}} | Votes: {{item.votes.count()}} / {{curPart}}%</input>-->
         </br>
         </br>
     % end

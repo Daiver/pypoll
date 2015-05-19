@@ -51,18 +51,10 @@ def results(url):
         hostUrl = '/'.join(urlparts.path.split('/')[:-2])
         labels = 'labels: [' + ','.join(["'%s'" % x.caption for x in poll.items]) + ']'
         voteData = '[' + ','.join(["'%d'" % x.votes.count() for x in poll.items]) + ']'
-        #labels: ['Italy', 'UK', 'USA', 'Germany', 'France', 'Japan'],
-        jsData = """{
-        %s ,
-    datasets: [
-        {
-            label: 'votes',
-            fillColor: '#312765',
-            data: %s
-        },
-    ]
-};""" % (labels, voteData)
-        return template('templates/results.html', poll=poll, hostname=hostUrl, info="", jsData=jsData)
+        jsData = """{%s ,datasets: 
+            [{label: 'votes', fillColor: '#312765', data: %s },]};""" % (labels, voteData)
+        return template('templates/results.html', 
+                poll=poll, hostname=hostUrl, info="", jsData=jsData)
     except Exception as e:
         return template('templates/404.html', info=str(e))
  
