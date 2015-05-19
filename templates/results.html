@@ -5,10 +5,10 @@
 
 <script language="javascript">
     $( document ).ready(function() {
-        var data = {{jsData}}
+        var data = {{!jsData}}
         console.log( "ready!" );
         var context = document.getElementById('results').getContext('2d');
-        var clientsChart = new Chart(context).Bar(barData);
+        var clientsChart = new Chart(context).Bar(data);
     });
 </script>
 

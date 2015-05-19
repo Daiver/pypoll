@@ -57,11 +57,6 @@ def results(url):
             fillColor: '#382765',
             data: [2500, 1902, 1041, 610, 1245, 952]
         },
-        {
-            label: '2014 customers #',
-            fillColor: '#7BC225',
-            data: [3104, 1689, 1318, 589, 1199, 1436]
-        }
     ]
 };"""
         return template('templates/results.html', poll=poll, hostname=hostUrl, info="", jsData=jsData)
