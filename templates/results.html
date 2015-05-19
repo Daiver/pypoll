@@ -7,36 +7,13 @@
     $( document ).ready(function() {
         var data = {{jsData}}
         console.log( "ready!" );
-        var fingerprint = new Fingerprint().get();
-        $("#token").val(fingerprint)
+        var context = document.getElementById('results').getContext('2d');
+        var clientsChart = new Chart(context).Bar(barData);
     });
 </script>
 
 
-<form action="{{hostname}}/vote", method="POST">
     <h3>Poll</h3>
     <h3>{{poll.name}}</h3>
 
-    <input type="HIDDEN" name=url value="{{poll.url}}" />
-
-    % count = 0
-    % for item in poll.items:
-        % count += item.votes.count()
-    % end
-
-    % for item in poll.items:
-        % if count == 0:
-            % curPart = 0
-        % end
-        % if count != 0:
-            % curPart = item.votes.count()/float(count)
-        % end
-        % curPart = '%10.4f' % (curPart * 100.0)
-        <input type="RADIO" name="choice" value="{{item.position}}"> {{item.caption}} | Votes: {{item.votes.count()}} / {{curPart}}%</input>
-        </br>
-        </br>
-    % end
-    <input type="HIDDEN" name=token id=token value="">
-    <input type="SUBMIT" />
-
-</form>
+    <canvas id="results" width="300" height="300"></canvas>
