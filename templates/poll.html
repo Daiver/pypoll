@@ -23,7 +23,8 @@
     % for item in poll.items:
         % if count == 0:
             % curPart = 0
-        % else
+        % end
+        % if count != 0:
             % curPart = item.votes.count()/float(count)
         % end
         <input type="RADIO" name="choice" value="{{item.position}}">{{item.caption}} | Votes: {{item.votes.count()}} / {{curPart}}%</input>
