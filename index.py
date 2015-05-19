@@ -20,15 +20,6 @@ from bottle import route, run, template, request, Bottle, post, redirect, respon
 def idGenerator(size=6, chars=string.ascii_uppercase + string.digits):
     return ''.join(random.choice(chars) for _ in range(size))
 
-#@route('/formtest')
-#def formtest():
-    #return template('templates/form.html', text='')
-
-#@post('/formtest')
-#def formtest():
-    #return template('templates/form.html', text=request.forms.get('name'))
-
-
 #hostname = "http://192.168.10.101/cgi-bin/pypoll.py"
 
 @route('/info/<var>')
