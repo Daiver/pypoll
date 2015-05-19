@@ -49,7 +49,7 @@ def results(url):
         poll = Poll.select().where(Poll.url == url).get()
         urlparts = request.urlparts
         hostUrl = '/'.join(urlparts.path.split('/')[:-2])
-        labels = 'labels: [' + ','.join(["'%s'" % x for x in poll.items]) + ']'
+        labels = 'labels: [' + ','.join(["'%s'" % x.caption for x in poll.items]) + ']'
         #labels: ['Italy', 'UK', 'USA', 'Germany', 'France', 'Japan'],
         jsData = """{
         %s
