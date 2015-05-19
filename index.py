@@ -90,31 +90,31 @@ def vote():
 
 @post('/newpoll')
 def newpoll():
-    try:
-        countOfItems = int(request.forms.get('countOfItems'))
-        url = idGenerator(20)
-        caption = request.forms.get('caption')
-        allowDoubleIP     = request.forms.get('allowDoubleIP')
-        allowDoubleTokens = request.forms.get('allowDoubleTokens')
-        if caption == '':
-            return template('templates/403.html', info='Caption cannot be empty')
+    #try:
+    countOfItems = int(request.forms.get('countOfItems'))
+    url = idGenerator(20)
+    caption = request.forms.get('caption')
+    allowDoubleIP     = request.forms.get('allowDoubleIP')
+    allowDoubleTokens = request.forms.get('allowDoubleTokens')
+    if caption == '':
+        return template('templates/403.html', info='Caption cannot be empty')
 
-        myDB.connect()
-        poll = Poll(url=url, name=caption, doubleIPAllowed=(allowDoubleIP != None), doubleTokensAllowed=(allowDoubleTokens != None))
-        poll.save()
-        for i in xrange(1, countOfItems + 1):
-            caption = request.forms.get('item_' + str(i))
-            if caption == "" or caption == None:
-                continue
+    myDB.connect()
+    poll = Poll(url=url, name=caption, doubleIPAllowed=(allowDoubleIP != None), doubleTokensAllowed=(allowDoubleTokens != None))
+    poll.save()
+    for i in xrange(1, countOfItems + 1):
+        caption = request.forms.get('item_' + str(i))
+        if caption == "" or caption == None:
+            continue
 
-            pollItem = PollItem(owner=poll, position=i, caption=caption)
-            pollItem.save()
+        pollItem = PollItem(owner=poll, position=i, caption=caption)
+        pollItem.save()
 
-        urlparts = request.urlparts
-        hostUrl = '/'.join(urlparts.path.split('/')[:-1])
-        return redirect(hostUrl + '/poll/' + url, code=200)
-    except Exception as e:
-        return template('templates/404.html', info=str(e))
+    urlparts = request.urlparts
+    hostUrl = '/'.join(urlparts.path.split('/')[:-1])
+    return redirect(hostUrl + '/poll/' + url, code=200)
+#    except Exception as e:
+        #return template('templates/404.html', info=str(e))
 
 @route('/')
 def index():
