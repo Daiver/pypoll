@@ -52,12 +52,12 @@ def results(url):
         labels = 'labels: [' + ','.join(["'%s'" % x.caption for x in poll.items]) + ']'
         #labels: ['Italy', 'UK', 'USA', 'Germany', 'France', 'Japan'],
         jsData = """{
-        %s
+        %s ,
     datasets: [
         {
             label: '2010 customers #',
             fillColor: '#382765',
-            data: [2500, 1902, 1041, 610, 1245, 952]
+            data: [2500, 1902,]
         },
     ]
 };""" % labels
