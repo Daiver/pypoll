@@ -43,13 +43,14 @@ def poll(url):
         return template('templates/404.html', info=str(e))
 
 @route('/results/<url>')
-def poll(url):
+def results(url):
     myDB.connect()
     try:
         poll = Poll.select().where(Poll.url == url).get()
         urlparts = request.urlparts
         hostUrl = '/'.join(urlparts.path.split('/')[:-2])
-        return template('templates/results.html', poll=poll, hostname=hostUrl, info="")
+        jsData = '[]'
+        return template('templates/results.html', poll=poll, hostname=hostUrl, info="", jsData=jsData)
     except Exception as e:
         return template('templates/404.html', info=str(e))
  
