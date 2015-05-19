@@ -49,9 +49,10 @@ def results(url):
         poll = Poll.select().where(Poll.url == url).get()
         urlparts = request.urlparts
         hostUrl = '/'.join(urlparts.path.split('/')[:-2])
-        labels = ["'%s'" % x for x in poll.items]
+        labels = 'labels: [' + ','.join(["'%s'" % x for x in poll.items]) + ']'
+        #labels: ['Italy', 'UK', 'USA', 'Germany', 'France', 'Japan'],
         jsData = """{
-    labels: ['Italy', 'UK', 'USA', 'Germany', 'France', 'Japan'],
+        %s
     datasets: [
         {
             label: '2010 customers #',
@@ -59,7 +60,7 @@ def results(url):
             data: [2500, 1902, 1041, 610, 1245, 952]
         },
     ]
-};"""
+};""" % labels
         return template('templates/results.html', poll=poll, hostname=hostUrl, info="", jsData=jsData)
     except Exception as e:
         return template('templates/404.html', info=str(e))
