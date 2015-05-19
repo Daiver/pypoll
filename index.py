@@ -104,7 +104,7 @@ def newpoll():
         poll.save()
         for i in xrange(1, countOfItems + 1):
             caption = request.forms.get('item_' + str(i))
-            if caption == "":
+            if caption == "" or caption == None:
                 continue
 
             pollItem = PollItem(owner=poll, position=i, caption=caption)
