@@ -41,8 +41,18 @@ def poll(url):
         return template('templates/poll.html', poll=poll, hostname=hostUrl, info="")
     except Exception as e:
         return template('templates/404.html', info=str(e))
-    #abort(404, "No such poll")
 
+@route('/results/<url>')
+def poll(url):
+    myDB.connect()
+    try:
+        poll = Poll.select().where(Poll.url == url).get()
+        urlparts = request.urlparts
+        hostUrl = '/'.join(urlparts.path.split('/')[:-2])
+        return template('templates/results.html', poll=poll, hostname=hostUrl, info="")
+    except Exception as e:
+        return template('templates/404.html', info=str(e))
+ 
 @post('/vote')
 def vote():
     #try:
