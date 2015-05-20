@@ -42,6 +42,22 @@ def poll(url):
     except Exception as e:
         return template('templates/404.html', info=str(e))
 
+@route('/textresults/<url>')
+def textresults(url):
+    myDB.connect()
+    try:
+        poll = Poll.select().where(Poll.url == url).get()
+        urlparts = request.urlparts
+        hostUrl = '/'.join(urlparts.path.split('/')[:-2])
+        labels = 'labels: [' + ','.join(["'%s'" % x.caption for x in poll.items]) + ']'
+        voteData = '[' + ','.join(["'%d'" % x.votes.count() for x in poll.items]) + ']'
+        jsData = """{%s ,datasets: 
+            [{label: 'votes', fillColor: '#312765', data: %s },]};""" % (labels, voteData)
+        return template('templates/textresults.html', 
+                poll=poll, hostname=hostUrl, info="", jsData=jsData)
+    except Exception as e:
+        return template('templates/404.html', info=str(e))
+ 
 @route('/results/<url>')
 def results(url):
     myDB.connect()
