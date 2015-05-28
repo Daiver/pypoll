@@ -1,0 +1,32 @@
+% rebase('templates/base.html')
+
+
+<script language="javascript">
+    $( document ).ready(function() {
+        console.log( "ready!" );
+        var fingerprint = new Fingerprint().get();
+        $("#token").val(fingerprint)
+    });
+</script>
+
+
+<form action="{{hostname}}/vote", method="POST">
+    <h3>Poll</h3>
+    <h3>{{poll.name}}</h3>
+
+    <h4><a href={{hostname}}/results/{{poll.url}}>Results</a></h4>
+<h4><a href={{hostname}}/textresults/{{poll.url}}>Text results for old browsers</a></h4>
+
+
+    <input type="HIDDEN" name=url value="{{poll.url}}" />
+
+    % for item in poll.items:
+
+        <input type="RADIO" name="choice" value="{{item.position}}"> {{item.caption}} </input>
+        </br>
+        </br>
+    % end
+    <input type="HIDDEN" name=token id=token value="">
+    <input type="SUBMIT" />
+
+</form>
