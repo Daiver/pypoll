@@ -11,7 +11,13 @@ import datetime
 import MySQLdb as mdb
 
 import peewee as pw
-myDB = pw.MySQLDatabase("pract", host="localhost", user="root", passwd="123")
+
+dbName     = "pract"
+dbHost     = "localhost"
+dbUser     = "root"
+dbPassword = "123"
+
+myDB = pw.MySQLDatabase(dbName, host=dbHost, user=dbUser, passwd=dbPassword)
 
 
 class Poll(pw.Model):
