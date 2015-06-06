@@ -7,7 +7,7 @@ from datetime import date
 if __name__ == '__main__':
 
     try:
-        con = mdb.connect(Model.dbHost, Model.dbUser, Model.dbPassword, dbName);
+        con = mdb.connect(Model.dbHost, Model.dbUser, Model.dbPassword, Model.dbName);
         cur = con.cursor()
         cur.execute("SELECT VERSION()")
 
