@@ -44,9 +44,9 @@ if __name__ == '__main__':
         print 'Cannot create table'
         print e
 
-    con.execute("ALTER TABLE pollvote CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;")
-    con.execute("ALTER TABLE pollitem CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;")
-    con.execute("ALTER TABLE poll CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;")
+    cur.execute("ALTER TABLE pollvote CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;")
+    cur.execute("ALTER TABLE pollitem CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;")
+    cur.execute("ALTER TABLE poll CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;")
 
     #ALTER TABLE tablename CONVERT TO CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
