@@ -14,6 +14,11 @@ if __name__ == '__main__':
         ver = cur.fetchone()
                         
         print "Database version : %s " % ver
+
+        cur.execute("DROP TABLE pollvote;")
+        cur.execute("DROP TABLE pollitem;")
+        cur.execute("DROP TABLE POLL;")
+
     except Exception as e:
         print "Some err on direct connect"
         print e
